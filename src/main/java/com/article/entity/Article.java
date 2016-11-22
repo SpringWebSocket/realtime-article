@@ -2,30 +2,11 @@ package com.article.entity;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Article {
 	
-	public static class Filter{
-		private String title;
-		private String category;
-		public String getTitle() {
-			return title;
-		}
-		public void setTitle(String title) {
-			this.title = title;
-		}
-		public String getCategory() {
-			return category;
-		}
-		public void setCategory(String category) {
-			this.category = category;
-		}
-		@Override
-		public String toString() {
-			return "Filter [title=" + title + ", category=" + category + "]";
-		}
-	}
-	
-	public static class FormAdd{
+	public static class This{
 		private int id;
 		private String title;
 		private String thumbnail;
@@ -90,8 +71,55 @@ public class Article {
 		}
 	}
 	
-	public static class FormUpdate extends FormAdd{
+	public static class Filter{
+		private String title;
+		private String category;
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getCategory() {
+			return category;
+		}
+		public void setCategory(String category) {
+			this.category = category;
+		}
+		@Override
+		public String toString() {
+			return "Filter [title=" + title + ", category=" + category + "]";
+		}
+	}
+	
+	public static class FormAdd extends This{}
+	
+	public static class FormUpdate extends FormAdd{}
+	
+	public static class FormAddMultipart extends FormAdd{
 		
+		private List<MultipartFile> multipartImages;
+
+		public List<MultipartFile> getMultipartImages() {
+			return multipartImages;
+		}
+
+		public void setMultipartImages(List<MultipartFile> multipartImages) {
+			this.multipartImages = multipartImages;
+			
+			//TODO: upload images to server and then get the location
+			super.setImages(null);
+		}
+
+		@Override
+		public String toString() {
+			return "FormAddMultipart [multipartImages=" + multipartImages + ", getId()=" + getId() + ", getThumbnail()="
+					+ getThumbnail() + ", getDescription()=" + getDescription() + ", getContent()=" + getContent()
+					+ ", getImages()=" + getImages() + ", getUser()=" + getUser() + ", getCategory()=" + getCategory()
+					+ ", getTitle()=" + getTitle() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+					+ ", hashCode()=" + hashCode() + "]";
+		}
+
 	}
 	
 }
